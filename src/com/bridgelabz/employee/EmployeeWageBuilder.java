@@ -12,15 +12,23 @@ public class EmployeeWageBuilder {
 		int isPresent = (int) (Math.random() * PRESENT_NUMBER_RANGE);
 
 		int empWage;
-		if (isPresent == PRESENT) {
+
+		switch (isPresent) {
+		case PRESENT:
 			System.out.println("Employee is present");
 			empWage = WAGE_PER_HOUR * WORKING_HOUR;
-		} else if(isPresent == PART_TIME) {
+			break;
+
+		case PART_TIME: {
 			System.out.println("Employee is working part time");
-			empWage = WAGE_PER_HOUR * (WORKING_HOUR/2);
-		}else {
+			empWage = WAGE_PER_HOUR * (WORKING_HOUR / 2);
+		}
+			break;
+
+		default:
 			System.out.println("Employee is absent");
 			empWage = 0;
+			break;
 		}
 		System.out.println("Emp wage : $" + empWage + " USD");
 	}
