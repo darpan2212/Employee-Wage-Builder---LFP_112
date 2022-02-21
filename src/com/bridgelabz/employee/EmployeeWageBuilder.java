@@ -8,9 +8,11 @@ public class EmployeeWageBuilder {
 		final int PART_TIME = 2;
 		final int WAGE_PER_HOUR = 20;
 		final int WORKING_HOUR = 8;
-
+		
 		int isPresent = (int) (Math.random() * PRESENT_NUMBER_RANGE);
 
+		System.out.println(Math.pow(2, 3));
+		
 		int empWage;
 
 		switch (isPresent) {
