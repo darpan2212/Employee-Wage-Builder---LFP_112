@@ -8,31 +8,31 @@ public class EmployeeWageBuilder {
 		final int PART_TIME = 2;
 		final int WAGE_PER_HOUR = 20;
 		final int WORKING_HOUR = 8;
-		
-		int isPresent = (int) (Math.random() * PRESENT_NUMBER_RANGE);
+		final int MAX_WORKING_DAY = 20;
 
-		System.out.println(Math.pow(2, 3));
-		
-		int empWage;
+		for (int day = 0; day < MAX_WORKING_DAY; day++) {
+			int isPresent = (int) (Math.random() * PRESENT_NUMBER_RANGE);
+			int empWage;
 
-		switch (isPresent) {
-		case PRESENT:
-			System.out.println("Employee is present");
-			empWage = WAGE_PER_HOUR * WORKING_HOUR;
-			break;
+			switch (isPresent) {
+			case PRESENT:
+				System.out.println("Employee is present");
+				empWage = WAGE_PER_HOUR * WORKING_HOUR;
+				break;
 
-		case PART_TIME: {
-			System.out.println("Employee is working part time");
-			empWage = WAGE_PER_HOUR * (WORKING_HOUR / 2);
+			case PART_TIME: {
+				System.out.println("Employee is working part time");
+				empWage = WAGE_PER_HOUR * (WORKING_HOUR / 2);
+			}
+				break;
+
+			default:
+				System.out.println("Employee is absent");
+				empWage = 0;
+				break;
+			}
+			System.out.println("day " + day + " : Emp wage : $" + empWage + " USD");
 		}
-			break;
-
-		default:
-			System.out.println("Employee is absent");
-			empWage = 0;
-			break;
-		}
-		System.out.println("Emp wage : $" + empWage + " USD");
 	}
 
 }
