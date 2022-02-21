@@ -9,10 +9,12 @@ public class EmployeeWageBuilder {
 		final int WAGE_PER_HOUR = 20;
 		final int WORKING_HOUR = 8;
 		final int MAX_WORKING_DAY = 20;
+		final int MAX_WORKING_HOUR = 80;
 
-		double totalWorkingHour = 0;
+		int totalWorkingHour = 0;
+		int day = 0;
 
-		for (int day = 0; day < MAX_WORKING_DAY; day++) {
+		while (day < MAX_WORKING_DAY && (totalWorkingHour + WORKING_HOUR / 2) < MAX_WORKING_HOUR) {
 			int isPresent = (int) (Math.random() * PRESENT_NUMBER_RANGE);
 			switch (isPresent) {
 			case PRESENT:
@@ -24,10 +26,13 @@ public class EmployeeWageBuilder {
 			}
 				break;
 			}
+			day++;
 		}
+
 		double salary = totalWorkingHour * WAGE_PER_HOUR;
 		System.out
 				.println("Employee monthly wage : $" + salary + " USD (total working hour : " + totalWorkingHour + ")");
+		System.out.println("Total working day : " + day);
 	}
 
 }
