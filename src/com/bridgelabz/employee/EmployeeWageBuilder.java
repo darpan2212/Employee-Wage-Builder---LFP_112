@@ -10,29 +10,24 @@ public class EmployeeWageBuilder {
 		final int WORKING_HOUR = 8;
 		final int MAX_WORKING_DAY = 20;
 
+		double totalWorkingHour = 0;
+
 		for (int day = 0; day < MAX_WORKING_DAY; day++) {
 			int isPresent = (int) (Math.random() * PRESENT_NUMBER_RANGE);
-			int empWage;
-
 			switch (isPresent) {
 			case PRESENT:
-				System.out.println("Employee is present");
-				empWage = WAGE_PER_HOUR * WORKING_HOUR;
+				totalWorkingHour = totalWorkingHour + WORKING_HOUR;
 				break;
 
 			case PART_TIME: {
-				System.out.println("Employee is working part time");
-				empWage = WAGE_PER_HOUR * (WORKING_HOUR / 2);
+				totalWorkingHour = totalWorkingHour + WORKING_HOUR / 2;
 			}
 				break;
-
-			default:
-				System.out.println("Employee is absent");
-				empWage = 0;
-				break;
 			}
-			System.out.println("day " + day + " : Emp wage : $" + empWage + " USD");
 		}
+		double salary = totalWorkingHour * WAGE_PER_HOUR;
+		System.out
+				.println("Employee monthly wage : $" + salary + " USD (total working hour : " + totalWorkingHour + ")");
 	}
 
 }
