@@ -7,6 +7,16 @@ public class EmployeeWageBuilder {
 	final int PART_TIME = 2;
 	final int WORKING_HOUR = 8;
 
+	String company;
+	int maxWorkingDay, maxWorkingHour, wagePerHour;
+
+	public EmployeeWageBuilder(String company, int maxWorkingDay, int maxWorkingHour, int wagePerHour) {
+		this.company = company;
+		this.maxWorkingDay = maxWorkingDay;
+		this.maxWorkingHour = maxWorkingHour;
+		this.wagePerHour = wagePerHour;
+	}
+
 	public int getWorkingHour(int empPresent) {
 		switch (empPresent) {
 		case PRESENT:
@@ -19,7 +29,7 @@ public class EmployeeWageBuilder {
 		return 0;
 	}
 
-	public double calculateEmpWage(String company, int maxWorkingDay, int maxWorkingHour, int wagePerHour) {
+	public double calculateEmpWage() {
 		System.out.println("Calculating the wage for " + company + "'s employee");
 		int totalWorkingHour = 0;
 		int day = 0;
@@ -47,11 +57,11 @@ public class EmployeeWageBuilder {
 	}
 
 	public static void main(String[] args) {
-		EmployeeWageBuilder empWageBuilder = new EmployeeWageBuilder();
-		empWageBuilder.calculateEmpWage("Dmart", 20, 80, 20);
+		EmployeeWageBuilder dmartEmp = new EmployeeWageBuilder("Dmart", 22, 60, 30);
+		dmartEmp.calculateEmpWage();
 		System.out.println("---------------------------------");
-		empWageBuilder.calculateEmpWage("RIL", 15, 50, 30);
-		System.out.println("---------------------------------");
-		empWageBuilder.calculateEmpWage("TCS", 18, 60, 40);
+		EmployeeWageBuilder rilEmp = new EmployeeWageBuilder("RIL", 20, 40, 40);
+		rilEmp.calculateEmpWage();
+
 	}
 }
