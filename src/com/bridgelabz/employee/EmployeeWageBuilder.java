@@ -1,29 +1,27 @@
 package com.bridgelabz.employee;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class EmployeeWageBuilder {
 
 	final int PRESENT = 1;
 	final int PART_TIME = 2;
 	final int WORKING_HOUR = 8;
 
-	CompanyEmpWage[] companies;
-	int lastIndex;
+	List<CompanyEmpWage> companies;
 
 	public EmployeeWageBuilder() {
-		this.companies = new CompanyEmpWage[10];
+		this.companies = new LinkedList<CompanyEmpWage>();
 	}
 
 	public void addCompany(String companyName,
 			int maxWorkingDay, int maxWorkingHour,
 			int wagePerHour) {
-		try {
-			companies[lastIndex++] = new CompanyEmpWage(
-					companyName, maxWorkingDay,
-					maxWorkingHour, wagePerHour);
-		} catch (Exception e) {
-			System.out.println(
-					"You can not add more company to the array as the size of an array is 5.");
-		}
+		CompanyEmpWage company = new CompanyEmpWage(
+				companyName, maxWorkingDay, maxWorkingHour,
+				wagePerHour);
+		companies.add(company);
 	}
 
 	public int getWorkingHour(int empPresent) {
@@ -39,11 +37,11 @@ public class EmployeeWageBuilder {
 	}
 
 	public void calculateEmpWage() {
-		for (int i = 0; i < companies.length; i++) {
-			if (companies[i] != null) {
-				calculateEmpWage(companies[i]);
-				System.out.println(companies[i]);
-			}
+		System.out.println(
+				"Total companies : " + companies.size());
+		for (int i = 0; i < companies.size(); i++) {
+			calculateEmpWage(companies.get(i));
+			System.out.println(companies.get(i));
 		}
 	}
 
@@ -82,7 +80,57 @@ public class EmployeeWageBuilder {
 		empWageBuilder.addCompany("DMart", 20, 60, 25);
 		empWageBuilder.addCompany("Reliance", 22, 80, 35);
 		empWageBuilder.addCompany("Asus", 20, 48, 22);
-		empWageBuilder.addCompany("Tech Mahindra", 25, 80, 40);
+		empWageBuilder.addCompany("Tech Mahindra", 25, 80,
+				40);
+		empWageBuilder.addCompany("HP", 25, 80, 40);
+		empWageBuilder.addCompany("DMart", 20, 60, 25);
+		empWageBuilder.addCompany("Reliance", 22, 80, 35);
+		empWageBuilder.addCompany("Asus", 20, 48, 22);
+		empWageBuilder.addCompany("Tech Mahindra", 25, 80,
+				40);
+		empWageBuilder.addCompany("HP", 25, 80, 40);
+		empWageBuilder.addCompany("DMart", 20, 60, 25);
+		empWageBuilder.addCompany("Reliance", 22, 80, 35);
+		empWageBuilder.addCompany("Asus", 20, 48, 22);
+		empWageBuilder.addCompany("Tech Mahindra", 25, 80,
+				40);
+		empWageBuilder.addCompany("HP", 25, 80, 40);
+		empWageBuilder.addCompany("DMart", 20, 60, 25);
+		empWageBuilder.addCompany("Reliance", 22, 80, 35);
+		empWageBuilder.addCompany("Asus", 20, 48, 22);
+		empWageBuilder.addCompany("Tech Mahindra", 25, 80,
+				40);
+		empWageBuilder.addCompany("HP", 25, 80, 40);
+		empWageBuilder.addCompany("DMart", 20, 60, 25);
+		empWageBuilder.addCompany("Reliance", 22, 80, 35);
+		empWageBuilder.addCompany("Asus", 20, 48, 22);
+		empWageBuilder.addCompany("Tech Mahindra", 25, 80,
+				40);
+		empWageBuilder.addCompany("HP", 25, 80, 40);
+		empWageBuilder.addCompany("DMart", 20, 60, 25);
+		empWageBuilder.addCompany("Reliance", 22, 80, 35);
+		empWageBuilder.addCompany("Asus", 20, 48, 22);
+		empWageBuilder.addCompany("Tech Mahindra", 25, 80,
+				40);
+		empWageBuilder.addCompany("HP", 25, 80, 40);
+		empWageBuilder.addCompany("DMart", 20, 60, 25);
+		empWageBuilder.addCompany("Reliance", 22, 80, 35);
+		empWageBuilder.addCompany("Asus", 20, 48, 22);
+		empWageBuilder.addCompany("Tech Mahindra", 25, 80,
+				40);
+		empWageBuilder.addCompany("HP", 25, 80, 40);
+		empWageBuilder.addCompany("DMart", 20, 60, 25);
+		empWageBuilder.addCompany("Reliance", 22, 80, 35);
+		empWageBuilder.addCompany("Asus", 20, 48, 22);
+		empWageBuilder.addCompany("Tech Mahindra", 25, 80,
+				40);
+		empWageBuilder.addCompany("HP", 25, 80, 40);
+		empWageBuilder.addCompany("DMart", 20, 60, 25);
+		empWageBuilder.addCompany("Reliance", 22, 80, 35);
+		empWageBuilder.addCompany("Asus", 20, 48, 22);
+		empWageBuilder.addCompany("Tech Mahindra", 25, 80,
+				40);
+		empWageBuilder.addCompany("HP", 25, 80, 40);
 
 		empWageBuilder.calculateEmpWage();
 	}
