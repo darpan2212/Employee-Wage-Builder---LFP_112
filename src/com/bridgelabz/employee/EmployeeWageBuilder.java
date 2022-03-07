@@ -2,19 +2,24 @@ package com.bridgelabz.employee;
 
 public class EmployeeWageBuilder {
 
-	final int PRESENT_NUMBER_RANGE = 3;
 	final int PRESENT = 1;
 	final int PART_TIME = 2;
 	final int WORKING_HOUR = 8;
 
-	String company;
-	int maxWorkingDay, maxWorkingHour, wagePerHour;
+	CompanyEmpWage[] companies;
+	int lastIndex;
 
-	public EmployeeWageBuilder(String company, int maxWorkingDay, int maxWorkingHour, int wagePerHour) {
-		this.company = company;
-		this.maxWorkingDay = maxWorkingDay;
-		this.maxWorkingHour = maxWorkingHour;
-		this.wagePerHour = wagePerHour;
+	public EmployeeWageBuilder() {
+		this.companies = new CompanyEmpWage[10];
+	}
+
+	public void addCompany(CompanyEmpWage company) {
+		try {
+			companies[lastIndex++] = company;
+		} catch (Exception e) {
+			System.out.println(
+					"You can not add more company to the array as the size of an array is 5.");
+		}
 	}
 
 	public int getWorkingHour(int empPresent) {
@@ -29,39 +34,72 @@ public class EmployeeWageBuilder {
 		return 0;
 	}
 
-	public double calculateEmpWage() {
-		System.out.println("Calculating the wage for " + company + "'s employee");
+	public void calculateEmpWage() {
+		for (int i = 0; i < companies.length; i++) {
+			if (companies[i] != null) {
+				calculateEmpWage(companies[i]);
+				System.out.println(companies[i]);
+			}
+		}
+	}
+
+	public void calculateEmpWage(CompanyEmpWage company) {
 		int totalWorkingHour = 0;
 		int day = 0;
 
-		while (day < maxWorkingDay && totalWorkingHour < maxWorkingHour) {
+		while (day < company.maxWorkingDay
+				&& totalWorkingHour < company.maxWorkingHour) {
 			int isPresent;
-			int remainingWorkingHour = maxWorkingHour - totalWorkingHour;
-			if (remainingWorkingHour < WORKING_HOUR && !(remainingWorkingHour < (WORKING_HOUR / 2))) {
+			int remainingWorkingHour = company.maxWorkingHour
+					- totalWorkingHour;
+			if (remainingWorkingHour < WORKING_HOUR
+					&& !(remainingWorkingHour < (WORKING_HOUR
+							/ 2))) {
 				isPresent = PART_TIME;
-			} else if (remainingWorkingHour < (WORKING_HOUR / 2)) {
+			} else if (remainingWorkingHour < (WORKING_HOUR
+					/ 2)) {
 				break;
 			} else {
-				isPresent = (int) (Math.random() * PRESENT_NUMBER_RANGE);
+				isPresent = (int) (Math.random() * 3);
 			}
 
-			totalWorkingHour = totalWorkingHour + getWorkingHour(isPresent);
+			totalWorkingHour = totalWorkingHour
+					+ getWorkingHour(isPresent);
 			day++;
 		}
+		company.totalWorkingHour = totalWorkingHour;
+		company.totalSalary = totalWorkingHour
+				* company.wagePerHour;
 
-		double salary = totalWorkingHour * wagePerHour;
-		System.out
-				.println("Employee monthly wage : $" + salary + " USD (total working hour : " + totalWorkingHour + ")");
-		System.out.println("Total working day : " + day);
-		return salary;
 	}
 
 	public static void main(String[] args) {
-		EmployeeWageBuilder dmartEmp = new EmployeeWageBuilder("Dmart", 22, 60, 30);
-		dmartEmp.calculateEmpWage();
-		System.out.println("---------------------------------");
-		EmployeeWageBuilder rilEmp = new EmployeeWageBuilder("RIL", 20, 40, 40);
-		rilEmp.calculateEmpWage();
+		CompanyEmpWage dmart = new CompanyEmpWage("DMart",
+				20, 60, 25);
 
+		CompanyEmpWage ril = new CompanyEmpWage("Reliance",
+				22, 80, 35);
+
+		CompanyEmpWage asus = new CompanyEmpWage("Asus", 20,
+				48, 22);
+
+		CompanyEmpWage techM = new CompanyEmpWage(
+				"Tech Mahindra", 25, 80, 40);
+
+		CompanyEmpWage hp = new CompanyEmpWage("HP", 20, 48,
+				22);
+
+		CompanyEmpWage lenovo = new CompanyEmpWage("Lenovo",
+				25, 80, 40);
+
+		EmployeeWageBuilder empWageBuilder = new EmployeeWageBuilder();
+		empWageBuilder.addCompany(dmart);
+		empWageBuilder.addCompany(ril);
+		empWageBuilder.addCompany(asus);
+		empWageBuilder.addCompany(techM);
+		empWageBuilder.addCompany(hp);
+		empWageBuilder.addCompany(lenovo);
+		
+		empWageBuilder.calculateEmpWage();
 	}
 }
