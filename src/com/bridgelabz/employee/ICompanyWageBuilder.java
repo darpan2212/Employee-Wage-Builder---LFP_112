@@ -9,4 +9,6 @@ public interface ICompanyWageBuilder {
 	public void computeEmpWage();
 	
 	public int totalCompanies();
+	
+	public CompanyEmpWage getTotalEmpWage(String companyName);
 }
