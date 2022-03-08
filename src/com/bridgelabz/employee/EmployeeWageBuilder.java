@@ -45,7 +45,7 @@ public class EmployeeWageBuilder
 	public CompanyEmpWage getTotalEmpWage(
 			String companyName) {
 		for (CompanyEmpWage companyEmpWage : companies) {
-			if (companyEmpWage.company.toLowerCase()
+			if (companyEmpWage.getCompany().toLowerCase()
 					.equals(companyName.toLowerCase())) {
 				return companyEmpWage;
 			}
@@ -57,11 +57,12 @@ public class EmployeeWageBuilder
 		int totalWorkingHour = 0;
 		int day = 0;
 
-		while (day < company.maxWorkingDay
-				&& totalWorkingHour < company.maxWorkingHour) {
+		while (day < company.getMaxWorkingDay()
+				&& totalWorkingHour < company
+						.getMaxWorkingHour()) {
 			int isPresent;
-			int remainingWorkingHour = company.maxWorkingHour
-					- totalWorkingHour;
+			int remainingWorkingHour = company
+					.getMaxWorkingHour() - totalWorkingHour;
 			if (remainingWorkingHour < WORKING_HOUR
 					&& !(remainingWorkingHour < (WORKING_HOUR
 							/ 2))) {
@@ -77,9 +78,9 @@ public class EmployeeWageBuilder
 					+ getWorkingHour(isPresent);
 			day++;
 		}
-		company.totalWorkingHour = totalWorkingHour;
-		company.totalSalary = totalWorkingHour
-				* company.wagePerHour;
+		company.setTotalWorkingHour(totalWorkingHour);
+		company.setTotalSalary(
+				totalWorkingHour * company.getWagePerHour());
 
 	}
 
