@@ -1,9 +1,11 @@
 package com.bridgelabz.employee;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class EmployeeWageBuilder {
+public class EmployeeWageBuilder
+		implements ICompanyWageBuilder {
 
 	final int PRESENT = 1;
 	final int PART_TIME = 2;
@@ -12,9 +14,10 @@ public class EmployeeWageBuilder {
 	List<CompanyEmpWage> companies;
 
 	public EmployeeWageBuilder() {
-		this.companies = new LinkedList<CompanyEmpWage>();
+		this.companies = new ArrayList<CompanyEmpWage>();
 	}
 
+	@Override
 	public void addCompany(String companyName,
 			int maxWorkingDay, int maxWorkingHour,
 			int wagePerHour) {
@@ -24,28 +27,22 @@ public class EmployeeWageBuilder {
 		companies.add(company);
 	}
 
-	public int getWorkingHour(int empPresent) {
-		switch (empPresent) {
-		case PRESENT:
-			return WORKING_HOUR;
-
-		case PART_TIME:
-			return WORKING_HOUR / 2;
-
-		}
-		return 0;
-	}
-
-	public void calculateEmpWage() {
-		System.out.println(
-				"Total companies : " + companies.size());
+	@Override
+	public void computeEmpWage() {
 		for (int i = 0; i < companies.size(); i++) {
-			calculateEmpWage(companies.get(i));
+			computeEmpWage(companies.get(i));
 			System.out.println(companies.get(i));
 		}
+		System.out.println(
+				"Total companies : " + totalCompanies());
 	}
 
-	public void calculateEmpWage(CompanyEmpWage company) {
+	@Override
+	public int totalCompanies() {
+		return companies.size();
+	}
+
+	private void computeEmpWage(CompanyEmpWage company) {
 		int totalWorkingHour = 0;
 		int day = 0;
 
@@ -73,6 +70,18 @@ public class EmployeeWageBuilder {
 		company.totalSalary = totalWorkingHour
 				* company.wagePerHour;
 
+	}
+
+	private int getWorkingHour(int empPresent) {
+		switch (empPresent) {
+		case PRESENT:
+			return WORKING_HOUR;
+
+		case PART_TIME:
+			return WORKING_HOUR / 2;
+
+		}
+		return 0;
 	}
 
 	public static void main(String[] args) {
@@ -132,6 +141,6 @@ public class EmployeeWageBuilder {
 				40);
 		empWageBuilder.addCompany("HP", 25, 80, 40);
 
-		empWageBuilder.calculateEmpWage();
+		empWageBuilder.computeEmpWage();
 	}
 }
