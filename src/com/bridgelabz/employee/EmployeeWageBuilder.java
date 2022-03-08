@@ -46,8 +46,9 @@ public class EmployeeWageBuilder
 			String companyName) {
 		for (CompanyEmpWage companyEmpWage : companies) {
 			if (companyEmpWage.company.toLowerCase()
-					.equals(companyName.toLowerCase()))
+					.equals(companyName.toLowerCase())) {
 				return companyEmpWage;
+			}
 		}
 		return null;
 	}
@@ -97,7 +98,7 @@ public class EmployeeWageBuilder
 	public static void main(String[] args) {
 		EmployeeWageBuilder empWageBuilder = new EmployeeWageBuilder();
 		empWageBuilder.addCompany("DMart", 20, 60, 25);
-		empWageBuilder.addCompany("Reliance", 22, 80, 35);
+		empWageBuilder.addCompany("Reliance", 22, 60, 35);
 		empWageBuilder.addCompany("Asus", 20, 48, 22);
 		empWageBuilder.addCompany("Tech Mahindra", 25, 80,
 				40);
@@ -105,7 +106,6 @@ public class EmployeeWageBuilder
 		empWageBuilder.computeEmpWage();
 
 		System.out.println(
-				empWageBuilder.getTotalEmpWage("hp"));
-		int size = empWageBuilder.totalCompanies();
+				empWageBuilder.getTotalEmpWage("asus"));
 	}
 }
